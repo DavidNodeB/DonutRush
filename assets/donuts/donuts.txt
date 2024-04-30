@@ -1,0 +1,47 @@
+donuts.png
+size: 762, 128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+donut_blue
+  rotate: false
+  xy: 1, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
+donut_choc
+  rotate: false
+  xy: 128, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
+donut_green
+  rotate: false
+  xy: 255, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
+donut_pink
+  rotate: false
+  xy: 382, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
+donut_purple
+  rotate: false
+  xy: 509, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
+donut_white
+  rotate: false
+  xy: 636, 1
+  size: 125, 126
+  orig: 128, 128
+  offset: 1, 0
+  index: -1
