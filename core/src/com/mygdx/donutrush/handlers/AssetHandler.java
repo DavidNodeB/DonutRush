@@ -1,12 +1,10 @@
-package com.mygdx.gemrush.handlers;
+package com.mygdx.donutrush.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-
-import javax.swing.plaf.TextUI;
 
 
 public class AssetHandler {

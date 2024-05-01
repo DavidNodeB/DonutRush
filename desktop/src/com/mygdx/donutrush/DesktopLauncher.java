@@ -1,9 +1,7 @@
-package com.mygdx.gemrush;
+package com.mygdx.donutrush;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.gemrush.GemRush;
-import com.mygdx.gemrush.config.GemRushConfig;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -13,6 +11,6 @@ public class DesktopLauncher {
 		config.setResizable(false);
 		config.setForegroundFPS(60);
 		config.setTitle("gemrush");
-		new Lwjgl3Application(GemRush.get(), config);
+		new Lwjgl3Application(DonutRush.get(), config);
 	}
 }

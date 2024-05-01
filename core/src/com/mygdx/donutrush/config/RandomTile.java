@@ -1,4 +1,4 @@
-package com.mygdx.gemrush.config;
+package com.mygdx.donutrush.config;
 
 import com.badlogic.gdx.math.MathUtils;
 

@@ -1,4 +1,4 @@
-package com.mygdx.gemrush.screens;
+package com.mygdx.donutrush.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,13 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.gemrush.GemRush;
+import com.mygdx.donutrush.DonutRush;
+import com.mygdx.donutrush.processors.LogicProcessor;
+
 public class MainScreen implements Screen {
     public Stage stage;
     public SpriteBatch batch;
     public MainScreen() {
-        batch = GemRush.get().batch;
+        batch = DonutRush.get().batch;
         stage = new Stage(new ScreenViewport());
+        LogicProcessor logicProcessor = new LogicProcessor();
+        Gdx.input.setInputProcessor(logicProcessor);
     }
 
     @Override
@@ -23,7 +27,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Texture background = GemRush.get().assetHandler.background;
+        Texture background = DonutRush.get().assetHandler.background;
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -31,7 +35,7 @@ public class MainScreen implements Screen {
         batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
         batch.begin();
         batch.draw(background, 0, 0, stage.getWidth(), stage.getHeight());
-        GemRush.get().map.render(batch);
+        DonutRush.get().map.render(batch);
         batch.end();
     }
 

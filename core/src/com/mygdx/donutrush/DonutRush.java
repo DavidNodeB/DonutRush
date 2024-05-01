@@ -1,24 +1,24 @@
-package com.mygdx.gemrush;
+package com.mygdx.donutrush;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.gemrush.config.GemRushConfig;
-import com.mygdx.gemrush.handlers.AssetHandler;
-import com.mygdx.gemrush.screens.MainScreen;
+import com.mygdx.donutrush.config.DonutRushConfig;
+import com.mygdx.donutrush.handlers.AssetHandler;
+import com.mygdx.donutrush.screens.MainScreen;
 
-public class GemRush extends Game {
+public class DonutRush extends Game {
 	public SpriteBatch batch;
 	public AssetHandler assetHandler;
 	public Map map;
-	private static GemRush gemrush;
+	private static DonutRush donutrush;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		assetHandler = new AssetHandler();
 		map = new Map();
-		Gdx.graphics.setWindowedMode(GemRushConfig.SCREEN_WIDTH, GemRushConfig.SCREEN_HEIGHT);
+		Gdx.graphics.setWindowedMode(DonutRushConfig.SCREEN_WIDTH, DonutRushConfig.SCREEN_HEIGHT);
 		setScreen(new MainScreen());
 	}
 
@@ -28,10 +28,10 @@ public class GemRush extends Game {
 		assetHandler.dispose();
 	}
 
-	public static GemRush get() {
-		if (gemrush == null) {
-			gemrush = new GemRush();
+	public static DonutRush get() {
+		if (donutrush == null) {
+			donutrush = new DonutRush();
 		}
-		return gemrush;
+		return donutrush;
 	} // define a singleton
 }
