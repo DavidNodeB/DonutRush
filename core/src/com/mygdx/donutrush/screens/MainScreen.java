@@ -1,6 +1,7 @@
 package com.mygdx.donutrush.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,8 +17,11 @@ public class MainScreen implements Screen {
     public MainScreen() {
         batch = DonutRush.get().batch;
         stage = new Stage(new ScreenViewport());
+        InputMultiplexer multiplexer = new InputMultiplexer();
         LogicProcessor logicProcessor = new LogicProcessor();
-        Gdx.input.setInputProcessor(logicProcessor);
+        multiplexer.addProcessor(logicProcessor);
+        multiplexer.setProcessors(logicProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override

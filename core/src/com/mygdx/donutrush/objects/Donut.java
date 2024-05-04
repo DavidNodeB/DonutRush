@@ -5,22 +5,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.donutrush.DonutRush;
 import com.mygdx.donutrush.Map;
-import com.mygdx.donutrush.config.RandomTile;
 
 public class Donut {
     public Sprite sprite;
     public int donutSize;
     public int dragX, dragY;
+    public Color color;
     public Boolean dragging;
 
     public Donut(int donutSize) {
         dragging = false;
         this.donutSize = donutSize;
-        assignSprites();
-    }
-    public void assignSprites() {
-        sprite = null;
-        switch (RandomTile.getRandom()) {
+        color = Color.getRandom();
+        switch (color) {
             case BLUE:
                 sprite = DonutRush.get().assetHandler.blue;
                 break;
@@ -41,26 +38,27 @@ public class Donut {
                 break;
         }
     }
+
     public void render(SpriteBatch batch, int x, int y) {
-        if (sprite !=null) {
+        int padding = 4;
 
-            int padding = 4;
+        int spacing = 13;
 
-            int spacing = 13;
+        int totalTileSize = donutSize + spacing;
 
-            int totalTileSize = donutSize + spacing;
+        int centerX = (Gdx.graphics.getWidth() - Map.rows * totalTileSize ) / 2 + x * totalTileSize;
 
-            int centerX = (Gdx.graphics.getWidth() - Map.rows * totalTileSize ) / 2 + x * totalTileSize;
-
-            int centerY = (Gdx.graphics.getHeight() - Map.columns * totalTileSize) / 2 + y * totalTileSize;
-            if (dragging) {
-                batch.draw(sprite, dragX, dragY, donutSize, donutSize);
-            } else {
-                batch.draw(sprite, centerX + padding, centerY + padding, donutSize, donutSize);
-            }
+        int centerY = (Gdx.graphics.getHeight() - Map.columns * totalTileSize) / 2 + y * totalTileSize;
+        if (dragging) {
+            batch.draw(sprite, dragX, dragY, donutSize, donutSize);
         } else {
-            assignSprites();
+            batch.draw(sprite, centerX + padding, centerY + padding, donutSize, donutSize);
         }
     }
-
+    public String getSprite() {
+        if (sprite != null) {
+            return sprite.toString();
+        }
+        return null;
+    }
 }
