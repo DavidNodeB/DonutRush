@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.donutrush.DonutRush;
+import com.mygdx.donutrush.handlers.DonutHandler;
+import com.mygdx.donutrush.objects.Donut;
 import com.mygdx.donutrush.processors.LogicProcessor;
 
 public class MainScreen implements Screen {
@@ -22,6 +24,7 @@ public class MainScreen implements Screen {
         multiplexer.addProcessor(logicProcessor);
         multiplexer.setProcessors(logicProcessor);
         Gdx.input.setInputProcessor(multiplexer);
+        DonutRush.get().donutHandler.deleteDonut();
     }
 
     @Override
@@ -32,13 +35,19 @@ public class MainScreen implements Screen {
     @Override
     public void render(float delta) {
         Texture background = DonutRush.get().assetHandler.background;
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.getViewport().apply();
+
         batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
+
         batch.begin();
+
         batch.draw(background, 0, 0, stage.getWidth(), stage.getHeight());
+
         DonutRush.get().map.render(batch);
         batch.end();
     }

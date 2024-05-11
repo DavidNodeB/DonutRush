@@ -12,11 +12,13 @@ public class Donut {
     public int dragX, dragY;
     public Color color;
     public Boolean dragging;
+    public Boolean removed;
 
     public Donut(int donutSize) {
         dragging = false;
         this.donutSize = donutSize;
         color = Color.getRandom();
+        removed = false;
         switch (color) {
             case BLUE:
                 sprite = DonutRush.get().assetHandler.blue;
@@ -30,7 +32,7 @@ public class Donut {
             case PINK:
                 sprite = DonutRush.get().assetHandler.pink;
                 break;
-            case PURPLE:
+            case RED:
                 sprite = DonutRush.get().assetHandler.purple;
                 break;
             case WHITE:
@@ -46,7 +48,7 @@ public class Donut {
 
         int totalTileSize = donutSize + spacing;
 
-        int centerX = (Gdx.graphics.getWidth() - Map.rows * totalTileSize ) / 2 + x * totalTileSize;
+        int centerX = (Gdx.graphics.getWidth() - Map.rows * totalTileSize) / 2 + x * totalTileSize;
 
         int centerY = (Gdx.graphics.getHeight() - Map.columns * totalTileSize) / 2 + y * totalTileSize;
         if (dragging) {
@@ -54,11 +56,6 @@ public class Donut {
         } else {
             batch.draw(sprite, centerX + padding, centerY + padding, donutSize, donutSize);
         }
-    }
-    public String getSprite() {
-        if (sprite != null) {
-            return sprite.toString();
-        }
-        return null;
+
     }
 }

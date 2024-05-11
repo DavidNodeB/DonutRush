@@ -7,8 +7,9 @@ public enum Color {
     CHOCOLATE,
     GREEN,
     PINK,
-    PURPLE,
-    WHITE;
+    RED,
+    WHITE,
+    NONE;
 
     public static Color getRandom() {
         return values()[(MathUtils.random(0, 5))];
