@@ -11,6 +11,7 @@ import com.mygdx.donutrush.screens.MainScreen;
 public class DonutRush extends Game {
 	public SpriteBatch batch;
 	public AssetHandler assetHandler;
+	public MainScreen mainScreen;
 	public DonutHandler donutHandler;
 	public Map map;
 	private static DonutRush donutrush;
@@ -18,11 +19,17 @@ public class DonutRush extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+
 		assetHandler = new AssetHandler();
+
+		mainScreen = new MainScreen();
+
 		map = new Map();
+
 		donutHandler = new DonutHandler();
+
 		Gdx.graphics.setWindowedMode(DonutRushConfig.SCREEN_WIDTH, DonutRushConfig.SCREEN_HEIGHT);
-		setScreen(new MainScreen());
+		setScreen(mainScreen);
 	}
 
 	@Override

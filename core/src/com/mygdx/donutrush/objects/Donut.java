@@ -2,23 +2,28 @@ package com.mygdx.donutrush.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.donutrush.DonutRush;
 import com.mygdx.donutrush.Map;
+import com.mygdx.donutrush.screens.MainScreen;
 
-public class Donut {
+public class Donut extends Actor {
     public Sprite sprite;
     public int donutSize;
+    public MainScreen screen;
     public int dragX, dragY;
     public Color color;
     public Boolean dragging;
-    public Boolean removed;
+    public Boolean deleted;
 
     public Donut(int donutSize) {
+        screen = DonutRush.get().mainScreen;
         dragging = false;
+        deleted = false;
         this.donutSize = donutSize;
+        this.setTouchable(Touchable.enabled);
         color = Color.getRandom();
-        removed = false;
         switch (color) {
             case BLUE:
                 sprite = DonutRush.get().assetHandler.blue;
@@ -41,7 +46,7 @@ public class Donut {
         }
     }
 
-    public void render(SpriteBatch batch, int x, int y) {
+    public void render(int x, int y) {
         int padding = 4;
 
         int spacing = 13;
@@ -51,11 +56,11 @@ public class Donut {
         int centerX = (Gdx.graphics.getWidth() - Map.rows * totalTileSize) / 2 + x * totalTileSize;
 
         int centerY = (Gdx.graphics.getHeight() - Map.columns * totalTileSize) / 2 + y * totalTileSize;
-        if (dragging) {
-            batch.draw(sprite, dragX, dragY, donutSize, donutSize);
-        } else {
-            batch.draw(sprite, centerX + padding, centerY + padding, donutSize, donutSize);
-        }
 
+        if (dragging) {
+            screen.stage.getBatch().draw(sprite, dragX, dragY, donutSize, donutSize);
+        } else {
+            screen.stage.getBatch().draw(sprite, centerX + padding, centerY + padding, donutSize, donutSize);
+        }
     }
 }

@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.donutrush.DonutRush;
-import com.mygdx.donutrush.handlers.DonutHandler;
-import com.mygdx.donutrush.objects.Donut;
 import com.mygdx.donutrush.processors.LogicProcessor;
 
 public class MainScreen implements Screen {
@@ -19,12 +17,14 @@ public class MainScreen implements Screen {
     public MainScreen() {
         batch = DonutRush.get().batch;
         stage = new Stage(new ScreenViewport());
+        // input handling
         InputMultiplexer multiplexer = new InputMultiplexer();
         LogicProcessor logicProcessor = new LogicProcessor();
         multiplexer.addProcessor(logicProcessor);
+        multiplexer.addProcessor(stage);
+        multiplexer.setProcessors(stage);
         multiplexer.setProcessors(logicProcessor);
         Gdx.input.setInputProcessor(multiplexer);
-        DonutRush.get().donutHandler.deleteDonut();
     }
 
     @Override
@@ -34,9 +34,10 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Texture background = DonutRush.get().assetHandler.background;
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        update(delta);
+
+        Texture background = DonutRush.get().assetHandler.background;
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -44,14 +45,21 @@ public class MainScreen implements Screen {
 
         batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
 
-        batch.begin();
+        stage.act(delta);
 
-        batch.draw(background, 0, 0, stage.getWidth(), stage.getHeight());
+        stage.getBatch().begin();
 
-        DonutRush.get().map.render(batch);
-        batch.end();
+        stage.getBatch().draw(background, 0, 0, stage.getWidth(), stage.getHeight());
+
+        DonutRush.get().map.render();
+
+        stage.getBatch().end();
+
+        stage.draw();
     }
-
+    public void update(float delta) {
+        DonutRush.get().donutHandler.deleteDonut();
+    }
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
