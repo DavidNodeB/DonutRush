@@ -14,6 +14,7 @@ import com.mygdx.donutrush.processors.LogicProcessor;
 public class MainScreen implements Screen {
     public Stage stage;
     public SpriteBatch batch;
+    public float timer = 0;
     public MainScreen() {
         batch = DonutRush.get().batch;
         stage = new Stage(new ScreenViewport());
@@ -58,7 +59,10 @@ public class MainScreen implements Screen {
         stage.draw();
     }
     public void update(float delta) {
-        DonutRush.get().donutHandler.deleteDonut();
+        timer += Gdx.graphics.getDeltaTime();
+        if (timer > 2) {
+            DonutRush.get().donutHandler.deleteDonut();
+        }
     }
     @Override
     public void resize(int width, int height) {
