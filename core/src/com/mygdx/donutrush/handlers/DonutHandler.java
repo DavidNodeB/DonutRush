@@ -43,6 +43,9 @@ public class DonutHandler {
                     } else if (timer >= 1) {
                         donuts[x + 1][y].deleted = true;
                     }
+                    if (timer >= 3) {
+                        shiftDonut();
+                    }
                 }
             }
         }
@@ -50,7 +53,7 @@ public class DonutHandler {
     public void shiftDonut() {
         for (int x = 0; x < columns; x++) {
             for (int y = 0; y < rows - 1; y++) {
-                if (!donuts[x][y].deleted) continue; // if donut deleted skip to next empty spot
+                if (!donuts[x][y].deleted) continue;
 
                 int nextY = y + 1; // get current empty spot and add 1 shifting it down
                 while (nextY < rows && donuts[x][nextY].deleted) {
@@ -65,4 +68,5 @@ public class DonutHandler {
             }
         }
     }
+
 }
