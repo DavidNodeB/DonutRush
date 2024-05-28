@@ -3,6 +3,7 @@ package com.mygdx.donutrush.handlers;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.donutrush.DonutRush;
 import com.mygdx.donutrush.Map;
+import com.mygdx.donutrush.config.DonutRushConfig;
 import com.mygdx.donutrush.objects.Donut;
 
 
@@ -68,5 +69,15 @@ public class DonutHandler {
             }
         }
     }
-
+    public void generateDonuts() {
+        for (int x = 0; x < columns; x++) {
+            for (int y = 0; y < rows; y++) {
+                if (!donuts[x][y].deleted) continue;
+                timer += Gdx.graphics.getDeltaTime();
+                if (timer >= 1) {
+                    donuts[x][y] = new Donut(Map.donutSize);
+                }
+            }
+        }
+    }
 }

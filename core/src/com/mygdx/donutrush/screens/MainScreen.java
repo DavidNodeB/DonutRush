@@ -63,6 +63,9 @@ public class MainScreen implements Screen {
         if (timer > 2) {
             DonutRush.get().donutHandler.deleteDonut();
         }
+        if (timer > 6) {
+            DonutRush.get().donutHandler.generateDonuts();
+        }
     }
     @Override
     public void resize(int width, int height) {

@@ -11,5 +11,5 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("gemrush");
 		new Lwjgl3Application(DonutRush.get(), config);
-	}
+		}
 }

@@ -46,5 +46,4 @@ public class Map {
         int realY = Math.clamp((y - (Gdx.graphics.getHeight() - Map.rows * totalTileSize) / 2 ) / totalTileSize, 0, Map.rows);
         return donuts[realX][realY];
     }
-
 }
