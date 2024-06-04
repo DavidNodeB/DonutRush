@@ -16,8 +16,8 @@ public class LogicProcessor implements InputProcessor {
     private int previousX, previousY;
     public Directions curDirection;
     public Donut[][] donuts;
-    public boolean vertical;
-    public int shiftR, shiftL, shiftU, shiftD;
+    public int originalX, originalY;
+    public int hoverX, hoverY;
 
     @Override
     public boolean keyDown(int keycode) {
@@ -38,6 +38,8 @@ public class LogicProcessor implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (button != Input.Buttons.LEFT || pointer > 0) return false;
         dragDonut = DonutRush.get().map.getDonut(screenX, Gdx.graphics.getHeight() - screenY);
+        originalX = screenX;
+        originalY = Gdx.graphics.getHeight() - screenY;
         return true;
     }
 
@@ -45,31 +47,32 @@ public class LogicProcessor implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (button != Input.Buttons.LEFT || pointer > 0) return false;
         donuts = DonutRush.get().map.donuts;
-        dragDonut.dragging = false;
         for (int x = 0; x < Map.rows; x++) {
             for (int y = 0; y < Map.columns; y++) {
-                switch (curDirection) {
-                    case UP:
-                        shiftU = y + 1;
-                        break;
-                    case DOWN:
-                        shiftD = y - 1;
-                        break;
-                    case LEFT:
-                        shiftL = x - 1;
-                        break;
-                    case RIGHT:
-                        shiftR = x + 1;
-                        break;
-                }
-                System.out.println(curDirection);
-                if (shiftU < Map.rows) {
-                    Donut temp = donuts[x][y];
-                    donuts[x][y] = donuts[x][shiftU];
-                    donuts[x][shiftU] = temp;
+                if (donuts[x][y].dragging) {
+                    switch (curDirection) {
+                        case RIGHT :
+                            donuts[x][y] = donuts[x + 1][y];
+                            donuts[x + 1][y] = donuts[x][y];
+                            break;
+                        case LEFT:
+                            donuts[x][y] = donuts[x - 1][y];
+                            donuts[x - 1][y] = donuts[x][y];
+                            break;
+                        case DOWN:
+                            donuts[x][y] = donuts[x][y - 1];
+                            donuts[x][y - 1] = donuts[x][y];
+                            break;
+                        case UP:
+                            donuts[x][y] = donuts[x][y + 1];
+                            donuts[x][y + 1] = donuts[x][y];
+                            break;
+                    }
                 }
             }
         }
+        hoverX = screenX;
+        hoverY = Gdx.graphics.getHeight() - screenY;
         return true;
     }
 
@@ -98,7 +101,6 @@ public class LogicProcessor implements InputProcessor {
         } else if (movementY < 0) {
             curDirection = Directions.DOWN;
         }
-
         previousX = screenX;
         previousY = Gdx.graphics.getHeight() - screenY;
         return true;
